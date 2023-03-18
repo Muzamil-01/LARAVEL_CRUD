@@ -13,8 +13,8 @@ class EmployeeController extends Controller
     public function index()
     {
         // return Employee::all();
-        $employees = new Employee();
-        $data = compact('employess');
+        $employees = Employee::all();
+        $data = compact('employees');
         return view('welcome')->with($data);
     }
 
@@ -31,9 +31,33 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(
+            [
+                'name' => 'required',
+                'fname' => 'required',
+                'city' => 'required',
+                'image' => 'required',
+            ]
+        );
+        $employees = new Employee();
+        $employees->name = $request['name'];
+        $employees->fname = $request['fname'];
+        $employees->city = $request['city'];
+        if ($request->has('image')) {
+            $file = $request->file('image');
+            $ext = $file->extension();
+            $filename = time() . '.' . $ext;
+            $file->move('uploads/users/', $filename);
+            $image = "uploads/users/" . $filename;
+        }
+        $employees->image = $image;
+        $employees->save();
+        redirect('/employess/view');
     }
-
+    public function add_view()
+    {
+        return view('add');
+    }
     /**
      * Display the specified resource.
      */

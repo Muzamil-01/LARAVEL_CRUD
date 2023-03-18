@@ -15,14 +15,14 @@
 <style>
     .bubble::after {
     content: '';
-    border-top-left-radius: 50% 100%;
-    border-top-right-radius: 50% 100%;
+    border-top-left-radius: 80% 100%;
+    border-top-right-radius: 80% 100%;
     position: absolute;
     bottom: 0;
     z-index: -1;
     width: 100%;
     background-color:rgb(230, 165, 0);
-    height: 85%;
+    height: 90%;
 }
 </style>
 <body>
@@ -36,7 +36,7 @@
 
             <ul class="navbar-nav m-auto mt-2 mt-lg-0 p-3">
             <li class="nav-item">
-              <a class="nav-link active" href="#" aria-current="page" style="font-size:19px;color: rgb(230, 165, 0)">ADD <span class="visually-hidden"></span></a>
+              <a class="nav-link active" href="{{url('/Add_employee')}}" aria-current="page" style="font-size:19px;color: rgb(230, 165, 0)">ADD <span class="visually-hidden"></span></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#" style="font-size:19px;color: goldenrod"></a>
@@ -56,7 +56,34 @@
   </header>
   <main class="bubble">
     <div class="container mt-5">
-       
+    <div class="row justify-content-center align-items-center g-2">
+        <div class="col-8">
+        <table class="table">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Father-name</th>
+                <th>City</th>
+                <th>Image</th>
+                <th>Actions</th>
+            </tr>
+            @foreach ($employees as $employee)
+                
+            <tr>
+                <td>{{$employee->id}}</td>
+                <td>{{$employee->name}}</td>
+                <td> {{$employee->fname}} </td>
+                <td> {{$employee->city}} </td>
+                <td> {{$employee->image}} </td>
+                <td>
+                    <a href="#" class="btn btn-primary btn-sm">Edit</a>
+                    <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+            @endforeach
+
+        </table>
+    </div>
     </div>
   </main>
   <footer>

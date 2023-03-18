@@ -56,17 +56,28 @@
   </header>
   <main class="bubble">
     <div class="container mt-5">
-        <form action="">
+        <form action="{{url('/add')}}" method="post" enctype="multipart/form-data">
+            @csrf
             <div class="row justify-content-center align-items-center g-2">
                 <div class="col-5">
                 <h2 class="text-dark">ADDING EMPLOYEES</h2>
                 <div class="input-group">
                     <label for="#" class="input-group-text" style="background-color: rgb(230, 165, 0);color:white ;border-color: rgb(230, 0, 0);width:100px">Name.</label>
-                    <input type="text" name="name" id="" class="form-control">
+                    <input type="text" name="name" id="" class="form-control" value="{{old('name')}}">
+                    <span class="text-danger">
+                        @error('name')
+                        {{$message}}
+                        @enderror
+                    </span>
                 </div>
                 <div class="input-group mt-3">
                     <label for="#" class="input-group-text" style="background-color: rgb(230, 165, 0);color:white ;border-color:rgb(230, 0, 0) ;width:100px">Fname</label>
-                    <input type="text" name="fathername" id="" class="form-control">
+                    <input type="text" name="fathername" id="" class="form-control" value="{{old('fname')}}">
+                    <span class="text-danger">
+                        @error('fname')
+                        {{$message}}
+                        @enderror
+                    </span>
                 </div>
                 <div class="input-group mt-3">
                     <label for="#" class="input-group-text" style="background-color: rgb(230, 165, 0);color:white ;border-color:rgb(230, 0, 0) ;width:100px">City</label>
@@ -75,10 +86,16 @@
                     <option value="Hyderabad">Hyderabad</option>
                     <option value="Hyderabad">Karachi</option>
                    </select>
+                   @error('city')
+                   {{$message}}
+                   @enderror
                 </div>
                 <div class="input-group mt-3">
                     <label for="#" class="input-group-text" style="background-color: rgb(230, 165, 0);color:white ;border-color:rgb(230, 0, 0) ;width:100px">Employee</label>
                     <input type="file" name="image" id="" class="form-control">
+                    @error('image')
+                    {{$message}}
+                    @enderror
                 </div>                    
                     <input type="submit" value="ADD-EMPLOYEE" class="btn btn-dark w-50 mt-3">
                 </div>
